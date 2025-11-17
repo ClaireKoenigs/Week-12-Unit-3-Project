@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Job Application</h1>
+            <button id="nav-toggle">☰</button>
+                <nav id="nav">
+                    <a href="index.html">Home</a>
+                    <a href="jobapplication.html">Job Application</a>
+                </nav>
+    </header>
+    <main>
+        <h2>Provide your information</h2>
+        <p>Please fill out the job application form below, and we will submit it to various companies that would best suit you.</p>
+    </main>
+    <form action="" method="get">
+        <fieldset>
+            <legend>Personal Information</legend>
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" name="firstname" required>
+                <br>
+                <label for="lastname">Last Name:</label>
+                <input type="text" id="lastname" name="lastname" required>
+                <br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <br>
+                <label for="phonenumber">Phone Number:</label>
+                <input type="tel" id="phonenumber" name="phonenumber" required>
+                <br>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Job Information/Preferences</legend>
+                <label>Preferred Job Type:</label>
+                <label><input type="radio" name="jobtype" value="Full-Time" required> Full-Time</label>
+                <label><input type="radio" name="jobtype" value="Part-Time" required> Part-Time</label>
+                <label><input type="radio" name="jobtype" value="Internship" required> Internship</label>
+                <label><input type="radio" name="jobtype" value="Contract" required> Contract</label>
+                <br>
+                <label for="location">Preferred Location:</label>
+                <input type="text" id="location" name="location" required>
+                <br>
+                <label for="resume">Upload Resume:</label>
+                <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+                <br>
+        </fieldset>
+        <br>
+        <input type="checkbox" id="consent" name="consent" required>
+        <label for="consent">I consent to having my information submitted to potential employers.</label>
+        <br>
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+    <footer>
+        <p>&copy; 2025 Employment Seeking Services of America</p>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.getElementById('nav-toggle');
+        const nav = document.getElementById('nav');
+        if (!toggleButton || !nav) return;
+
+        const navLinks = nav.querySelectorAll('a');
+
+        toggleButton.setAttribute('aria-controls', 'nav');
+        toggleButton.setAttribute('aria-expanded', 'false');
+        toggleButton.setAttribute('aria-label', 'Toggle navigation');
+
+        function openNav() {
+            nav.classList.add('show');
+            toggleButton.setAttribute('aria-expanded', 'true');
+            if (navLinks.length) navLinks[0].focus();
+        }
+
+        function closeNav() {
+            nav.classList.remove('show');
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.focus();
+        }
+
+        toggleButton.addEventListener('click', () => {
+            if (nav.classList.contains('show')) closeNav();
+            else openNav();
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('show')) closeNav();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('show')) {
+                closeNav();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && e.target !== toggleButton && nav.classList.contains('show')) {
+                closeNav();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

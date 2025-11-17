@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Web Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Employment Seeking Services of America</h1>
+            <button id="nav-toggle">☰</button>
+                <nav id="nav">
+                    <a href="index.html">Home</a>
+                    <a href="jobapplication.html">Job Application</a>
+                </nav>
+    </header>
+    <main>
+        <h2>Welcome to Our Employment Services</h2>
+        <p>We help you find the best job opportunities tailored to your skills and preferences.</p>
+        <p>Use the navigation menu to explore our services and submit your job application.</p>
+        <div id="column">
+            <div id="left">
+                <h3>Services Overview</h3>
+                <ul>
+                    <li>Personalized Job Matching</li>
+                    <li>Resume Building Assistance</li>
+                    <li>Interview Preparation</li>
+                    <li>Career Counseling</li>
+                    <li>Job Market Insights</li>
+                </ul>
+            </div>
+            <div id="right">
+                <img src="employment.jpg" alt="Employment Services" width="650" height="400">
+            </div>
+        </div>
+        <div id="contact">
+            <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: essoa@example.companies</li>
+                    <li>Phone: (123) 456-7890</li>
+                    <li>Address: 123 Employment St, USA</li>
+                    <li>Facebook: facebook.com/essoa</li>
+                    <li>LinkedIn: linkedin.com/company/essoa</li>
+                </ul>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Employment Seeking Services of America</p>
+    </footer>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleButton = document.getElementById('nav-toggle');
+        const nav = document.getElementById('nav');
+        if (!toggleButton || !nav) return;
+
+        const navLinks = nav.querySelectorAll('a');
+
+        toggleButton.setAttribute('aria-controls', 'nav');
+        toggleButton.setAttribute('aria-expanded', 'false');
+        toggleButton.setAttribute('aria-label', 'Toggle navigation');
+
+        function openNav() {
+            nav.classList.add('show');
+            toggleButton.setAttribute('aria-expanded', 'true');
+            if (navLinks.length) navLinks[0].focus();
+        }
+
+        function closeNav() {
+            nav.classList.remove('show');
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.focus();
+        }
+
+        toggleButton.addEventListener('click', () => {
+            if (nav.classList.contains('show')) closeNav();
+            else openNav();
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('show')) closeNav();
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.classList.contains('show')) {
+                closeNav();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!nav.contains(e.target) && e.target !== toggleButton && nav.classList.contains('show')) {
+                closeNav();
+            }
+        });
+    });
+    </script>
+</body>
+</html>
